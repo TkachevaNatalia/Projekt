@@ -5,7 +5,7 @@
 
 	$link = mysqli_connect ('localhost', $my_user, $my_pass, $my_db)
 
-	or die ('Не получилось');
+	or die ('РќРµ РїРѕР»СѓС‡РёР»РѕСЃСЊ');
 
 	mysqli_query ($link, "SET NAMES 'utf8");
 
