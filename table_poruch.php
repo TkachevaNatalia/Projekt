@@ -1,7 +1,7 @@
 <?php
 	
-	$query = "select opisanie, data_poruch, (select fio from task, user where user.idu=task.poruchitel LIMIT 1) as por, 
-			(select fio from task, user where user.idu=task.ispolnitel LIMIT 1) as isp, srok, data_ispol, status from task";
+	$query = "SELECT opisanie, data_poruch, fio as por, fio as isp, srok, data_ispol, status FROM task, user WHERE por=task.poruchitel
+		  AND isp=task.ispolnitel";
 			
 	$res1 = mysqli_query ($link, $query); 
 
