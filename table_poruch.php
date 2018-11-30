@@ -14,6 +14,11 @@
 			(select fio from task, user where user.idu=task.ispolnitel), srok, data_ispol, status from task";
 	$res - mysqli_query ($link, $query);
 	
-	while ($row = mysqli_fetch_array ($res));
-		echo $row [''].$row ['phone']."<br>";
+	//while ($row = mysqli_fetch_array ($res));
+
+
+echo "<div>Исполнено:  $row [fio]</div>";
+	
+	//echo Исполнено: $row ['fio'].
+	Исполнено: $row ['phone']."<br>";
 ?>
