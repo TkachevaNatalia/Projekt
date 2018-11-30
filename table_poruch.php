@@ -1,10 +1,12 @@
 <?php
+	
+	$query = "select opisanie, data_poruch, (select fio from task, user where user.idu=task.poruchitel LIMIT 1) as por, 
+			(select fio from task, user where user.idu=task.ispolnitel LIMIT 1) as isp, srok, data_ispol, status from task";
+			
+	$res1 = mysqli_query ($link, $query); 
 
-	$query = "select opisanie, data_poruch, (select FIO from task, user where user.idu=task.poruchitel limit 1) as por, 
-			(select FIO from task, user where user.idu=task.ispolnitel limit 1) as isp, srok, data_ispol, status from task";
-
-	<table>
- 		<tr>
+	$ech_res = "<table>
+	<thead>
   			<th>Поручение</th>
 			<th>Дата поручения</th>
 			<th>Поручитель</th>
@@ -12,19 +14,26 @@
 			<th>Срок исполнения</th>
 			<th>Дата исполнения</th>
 			<th>Статус</th>			
-		</tr>
-	
-	while ($row = mysqli_fetch_array ($res)){
+	</thead>
+	";
+	while ($row = mysqli_fetch_array ($res1, MYSQLI_ASSOC)){
+		
+		$ech_res.="
 		<tr>
-  			<td>echo $row ['opisanie']</td>
-			<td>echo $row ['data_poruch']</td>
-			<td>echo $row ['por']</td>
-			<td>echo $row ['isp']</td>
-			<td>echo $row ['srok']</td>
-			<td>echo $row ['data_ispol']</td>
-			<td>echo $row ['status']</td>
+  			<td>$row[opisanie]</td>
+			<td>$row[data_poruch]</td>
+			<td>$row[por]</td>
+			<td>$row[isp]</td>
+			<td>$row[srok]</td>
+			<td>$row[data_ispol]</td>
+			<td>$row[status]</td>
 		</tr>
-	}
-	
-	</table>
+		";
+		
+		/*echo "<pre>";
+		print_r($row);
+		echo "</pre>";*/
+	}	
+	$ech_res.="</table>";
+	echo $ech_res;
 ?>
