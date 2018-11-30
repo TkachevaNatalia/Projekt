@@ -1,30 +1,30 @@
 <?php
-	$my_db = "journal";
-	$my_user = "root";
-	$my_pass = "";
-	
-	
-	$link = mysqli_connect ('localhost', $my_user, $my_pass, $my_db)
-	or die ('Не получилось');
-	
-	mysqli_query ($link, "SET NAMES 'utf8");
-	
-	
-	$query = "select opisanie, data_poruch, (select fio from task, user where user.idu=task.poruchitel), 
-			(select fio from task, user where user.idu=task.ispolnitel), srok, data_ispol, status from task";
 
-	for ($res - mysqli_query ($link, $query); $row = mysqli_fetch_array ($res);){
-		
-		
-	}
-	
-	while ($row = mysqli_fetch_array ($res));	
-	//echo Исполнено: $row ['fio'].
-	
+	$query = "select opisanie, data_poruch, (select FIO from task, user where user.idu=task.poruchitel), 
+			(select FIO from task, user where user.idu=task.ispolnitel), srok, data_ispol, status from task";
+
 	<table>
  		<tr>
-  		  <td>echo Исполнено: $row ['fio']</td>
-		  <td>echo Исполнено: $row ['fio']</td>
+  			<th>Поручение</th>
+			<th>Дата поручения</th>
+			<th>Поручитель</th>
+			<th>Исполнитель</th>
+			<th>Срок исполнения</th>
+			<th>Дата исполнения</th>
+			<th>Статус</th>			
 		</tr>
+	
+	while ($row = mysqli_fetch_array ($res)){
+		<tr>
+  			<td>echo $row ['opisanie']</td>
+			<td>echo $row ['</td>
+			<td>Поручение</td>
+			<td>Поручение</td>
+			<td>Поручение</td>
+			<td>Поручение</td>
+			<td>Поручение</td>
+		</tr>
+	}
+	
 	</table>
 ?>
