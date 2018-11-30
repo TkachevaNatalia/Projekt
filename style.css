@@ -1,0 +1,24 @@
+.index_form{
+ margin:100px auto;
+ max-width:400px;
+ border:1px solid #ced4da;
+ padding:20px;
+ border-radius:6px;
+ box-shadow:-1px 0px 32px 7px rgba(0,0,0,0.04);
+}
+.TopText{
+display:table;
+margin:20px auto;
+font:bold 26px Tahoma;
+color:#007bff;
+}
+.BottomText{
+display:table;
+margin:20px auto;
+font:14px Tahoma;
+color:#6c757d;
+}
+.TopMenu{
+background:;
+
+}
