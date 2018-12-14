@@ -4,7 +4,7 @@
 	</div>
 	<div class="col-2">
 		<?php
-		echo "<div>Вы зашли как: $res_user[login]</div>";
+		echo "<div>Вы зашли как: $res_user[login] (Должность:$res_user[function])</div>";
 		
 		?>
 		<form action='obrabot.php' method='POST'>

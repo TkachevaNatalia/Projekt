@@ -1,7 +1,6 @@
 <?php
 	
-	$query = "select opisanie, data_poruch, (select fio from task, user where user.idu=task.poruchitel LIMIT 1) as por, 
-			(select fio from task, user where user.idu=task.ispolnitel LIMIT 1) as isp, srok, data_ispol, status from task";
+	$query = "SELECT task.*,user.* FROM task,user WHERE task.poruchitel = '$res_user[idu]' AND task.ispolnitel=user.idu";
 			
 	$res1 = mysqli_query ($link, $query); 
 
@@ -9,8 +8,7 @@
 	<thead>
   			<th>Поручение</th>
 			<th>Дата поручения</th>
-			<th>Поручитель</th>
-			<th>Исполнитель</th>
+			<th>ФИО Исполнителя</th>
 			<th>Срок исполнения</th>
 			<th>Дата исполнения</th>
 			<th>Статус</th>			
@@ -22,8 +20,7 @@
 		<tr>
   			<td>$row[opisanie]</td>
 			<td>$row[data_poruch]</td>
-			<td>$row[por]</td>
-			<td>$row[isp]</td>
+			<td>$row[FIO]</td>
 			<td>$row[srok]</td>
 			<td>$row[data_ispol]</td>
 			<td>$row[status]</td>

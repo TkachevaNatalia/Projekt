@@ -26,4 +26,5 @@
 		}
 	}
 	$link = mysqli_connect ('localhost', $my_user, $my_pass, $my_db);
+	mysqli_query($link, "SET CHARSET utf8");
 ?>

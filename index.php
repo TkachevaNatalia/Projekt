@@ -7,6 +7,7 @@ require_once("db.php");//Подрубаем БД
 ?>
 <html>
 <head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
  <title>Каталоги какие то</title>
  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
  <link rel="stylesheet" href="style.css">
@@ -18,7 +19,7 @@ require_once("db.php");//Подрубаем БД
  
  if(((isset($_SESSION['login'])) and ($_SESSION['login'] != '')) and ((isset($_SESSION['pass'])) and ($_SESSION['pass'] != ''))){//Если есть сессии авторизации
  
-	$user = mysqli_query($link, "SELECT * FROM authorization WHERE login = '$_SESSION[login]' AND `password` = '$_SESSION[pass]'");
+	$user = mysqli_query($link, "SELECT * FROM authorization, user WHERE login = '$_SESSION[login]' AND `password` = '$_SESSION[pass]' AND user.idu = authorization.user_idu");
 	$res_user = mysqli_fetch_array($user);
 	
 	if(!empty($res_user)){ $is_login = true; }//Если есть данные в БД для наших сессий то юзер авторизован
