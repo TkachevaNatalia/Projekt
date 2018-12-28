@@ -12,6 +12,9 @@ if(isset($_POST['ObrabotLogin'])){//Авторизация
 	$res_user = mysqli_fetch_array($user);
 	
 	if(!empty($res_user)){//Все хорошо, авторизуем
+	if ($res_user['login']=='admin'){
+		$_SESSION['admin'] = $res_user['login'];
+	}
 		$_SESSION['login'] = $res_user['login'];
 		$_SESSION['pass'] = $res_user['password'];
 	}else{
@@ -23,6 +26,19 @@ if(isset($_POST['ObrabotLogin'])){//Авторизация
 	
 	unset($_SESSION['login']);
 	unset($_SESSION['pass']);
+	header('Location: http://localhost/147b/index.php');
+	
+}else if(isset($_POST['NewUser'])){
+	if(isset($_POST['login'])){$login = $_POST['login'];}
+	if(isset($_POST['password'])){$password = $_POST['password'];}
+	if(isset($_POST['fio'])){$fio = $_POST['fio'];}
+	if(isset($_POST['mail'])){$mail = $_POST['mail'];}
+	if(isset($_POST['tel'])){$tel = $_POST['tel'];}
+	if(isset($_POST['func'])){$mail = $_POST['func'];}
+	
+	$query = "INSERT INTO authorization (col1,col2) VALUES(15,col1*2) = '$res_user[idu]' AND task.ispolnitel=user.idu"
+	
+	$res1 = mysqli_query ($link, $query);	
 	header('Location: http://localhost/147b/index.php');
 	
 }else if(isset($_POST['ObrabotSort'])){//Сортировка

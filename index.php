@@ -16,12 +16,15 @@ require_once("db.php");//Подрубаем БД
 <div class="container">
 <?php 
  $is_login = false;
+ $is_admin = false;
  
  if(((isset($_SESSION['login'])) and ($_SESSION['login'] != '')) and ((isset($_SESSION['pass'])) and ($_SESSION['pass'] != ''))){//Если есть сессии авторизации
  
 	$user = mysqli_query($link, "SELECT * FROM authorization, user WHERE login = '$_SESSION[login]' AND `password` = '$_SESSION[pass]' AND user.idu = authorization.user_idu");
 	$res_user = mysqli_fetch_array($user);
-	
+	if((isset($_SESSION['admin'])) and ($_SESSION['admin'] != '')){
+		$is_admin = true;
+	}
 	if(!empty($res_user)){ $is_login = true; }//Если есть данные в БД для наших сессий то юзер авторизован
 	
  }
@@ -45,6 +48,13 @@ require_once("db.php");//Подрубаем БД
 			  <li class="nav-item">
 				<a class="nav-link" href="/147b/index.php?page=my_order">Мои поручения</a>
 			  </li>
+			  <?php
+			  if ($is_admin){
+				  echo '<li class="nav-item">
+				<a class="nav-link" href="/147b/index.php?page=cr_user">Создать пользователя</a>
+			  </li>';
+			  }
+			  ?>
 			</ul>
 			<form class="form-inline my-2 my-lg-0">
 			  <input class="form-control mr-sm-2" type="search" placeholder="Поиск" aria-label="Search">
@@ -64,6 +74,10 @@ require_once("db.php");//Подрубаем БД
 		require_once("pages/my_tasks.php");
 	}else if($page == "my_order"){//мои поручения
 		require_once("pages/my_order.php");
+	}else if($page == "cr_user"){//flvbfddef
+		if($is_admin){
+			require_once("pages/cr_user.php");
+		}
 	}
 	?>
 	</div>
