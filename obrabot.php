@@ -28,18 +28,28 @@ if(isset($_POST['ObrabotLogin'])){//Авторизация
 	unset($_SESSION['pass']);
 	header('Location: http://localhost/147b/index.php');
 	
-}else if(isset($_POST['NewUser'])){
+}else if(isset($_POST['NewUser'])){	 //Новый пользователь
 	if(isset($_POST['login'])){$login = $_POST['login'];}
 	if(isset($_POST['password'])){$password = $_POST['password'];}
 	if(isset($_POST['fio'])){$fio = $_POST['fio'];}
+	if(isset($_POST['dep'])){$dep = $_POST['dep'];}
 	if(isset($_POST['mail'])){$mail = $_POST['mail'];}
 	if(isset($_POST['tel'])){$tel = $_POST['tel'];}
-	if(isset($_POST['func'])){$mail = $_POST['func'];}
+	if(isset($_POST['func'])){$func = $_POST['func'];}
 	
-	$query = "INSERT INTO authorization (col1,col2) VALUES(15,col1*2) = '$res_user[idu]' AND task.ispolnitel=user.idu"
-	
-	$res1 = mysqli_query ($link, $query);	
-	header('Location: http://localhost/147b/index.php');
+	if ((!empty($login)) and (!empty($password)) and (!empty($fio)) and (!empty($dep))and (!empty($mail))and (!empty($tel)) and (!empty($func))){	
+	$query = "INSERT INTO user (`FIO`, `function`,`depart_idd`, `e-mail`, `tel`) VALUES ('$fio', '$func', '$dep', '$mail', '$tel')";	
+	$res1 = mysqli_query($link, $query);	
+	if (!empty($res1)){
+		$_SESSION['data']="Вы успешно добавили пользователя!";
+		unset($_SESSION['data2']);
+	}	
+	$query = "INSERT INTO authorization (`login`, `password`, `user_idu`) VALUES ('$login', '$password', (SELECT idu FROM user WHERE user.FIO = '$fio'))";
+	$res1 = mysqli_query($link, $query);
+	}else{$_SESSION['data']="Заполните все поля!";
+		  $_SESSION['data2']=$_POST;}
+		
+	header('Location: http://localhost/147b/index.php?page=cr_user');
 	
 }else if(isset($_POST['ObrabotSort'])){//Сортировка
 	if(isset($_POST['status'])){$status = $_POST['status'];}
